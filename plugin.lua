@@ -1,38 +1,3 @@
-﻿--[[Venue>Location
-xps>pdf
-pdf>xps
-web > photo
-web > pdf
-voice > text
-photo > html
-photo > text
-photo > OCR
-HTML>photo
-HTML>apk]]
-
---[[
-****************** back ro bardare/watermark/chapo raste axso ezafe kone
-convert aa.jpg -quality 10 1.jpg
-convert aa.jpg -contrast 15.jpg
-convert aa.jpg -brightness-contrast 15 14.jpg
-convert aa.jpg -auto-gamma 2.jpg
-convert aa.jpg -gamma 100 17.jpg
-convert aa.jpg -noise 20 20.jpg
-convert aa.jpg -segment 200 25.jpg
-convert aa.jpg -blur 500 3.jpg
-convert aa.jpg -radial-blur 5 21.jpg
-convert aa.jpg -border 20 4.jpg
-convert aa.jpg -raise 20 22.jpg
-convert aa.jpg -scale 200 24.jpg
-convert aa.jpg -resize
-convert aa.jpg -rotate
-
-GIF, JPEG, JPG, PNG,  PDF, TIFF,  DPX
--bordercolor color
-]]
-
---[[photo > pdf
-pdf serialize
 function pdf_conv(msg)
 	if users[userid].sub == 1 then
 		if check_match(msg.text, {"PDF>TIFF","TIFF>PDF","PDF>JPG","JPG>PDF","PDF>PNG","PNG>PDF"}) then
@@ -65,7 +30,6 @@ function pdf_conv(msg)
 		end
 	end
 end
-]]
 
 function photo_lower(msg)
 	if msg.photo then
@@ -139,93 +103,6 @@ function html_conv(msg)
 		end
 	else
 		return send_msg(msg.from.id, "_You can send only_ *HTM* _files_", true)
-	end
-	
-	if users[userid].sub == 2 then
-		return send_msg(msg.from.id, "soon", true) -----------------------------------------------------------------------
-	elseif users[userid].sub == 3 then
-		char0 = '<?php\necho "'
-		char3 = '\\n";\necho "'
-		char4 = '";\n?>'
-		char5 = '<!--\nhttp://telegram.me/UmbrellaTeam\nUmbrella Team and shayan soft Co. Group\n//-->'
-		dl_file("temp/dl"..msg.from.id..".htm", msg.document.file_id)
-		file = io.open("temp/dl"..msg.from.id..".htm", "r"):read("*all")
-		input = file:gsub("\r", "")
-		text = input:gsub("\n", char3)
-		text = char0..text..char4..'\n\n'..char5
-		file = io.open("temp/index.php", "w")
-		file:write(text)
-		file:flush()
-		file:close() 
-		up_file(msg.from.id, "temp/index.php", bot_user)
-		return back(msg)
-	elseif users[userid].sub == 4 then
-		char0 = 'document.writeln("'
-		char3 = '");\ndocument.writeln("'
-		char4 = '");'
-		char5 = '// http://telegram.me/UmbrellaTeam\n// Umbrella Team and shayan soft Co. Group'
-		dl_file("temp/dl"..msg.from.id..".htm", msg.document.file_id)
-		file = io.open("temp/dl"..msg.from.id..".htm", "r"):read("*all")
-		input = file:gsub("\r", "")
-		text = input:gsub("\n", char3)
-		text = char0..text..char4..'\n\n'..char5
-		file = io.open("temp/script.js", "w")
-		file:write(text)
-		file:flush()
-		file:close() 
-		up_file(msg.from.id, "temp/script.js", bot_user)
-		send_msg(msg.from.id, '_For use this script file, use this command in_ *HTML* _file:_\n`<SCRIPT type=text/javascript src="script.js"></SCRIPT>`', true)
-		return back(msg)
-	elseif users[userid].sub == 5 then
-		char0 = '<script type="text/javascript">\ndocument.writeln("'
-		char3 = '");\ndocument.writeln("'
-		char4 = '");\n</script>'
-		char5 = '<!--\nhttp://telegram.me/UmbrellaTeam\nUmbrella Team and shayan soft Co. Group\n//-->'
-		dl_file("temp/dl"..msg.from.id..".htm", msg.document.file_id)
-		file = io.open("temp/dl"..msg.from.id..".htm", "r"):read("*all")
-		input = file:gsub("\r", "")
-		text = input:gsub("\n", char3)
-		text = char0..text..char4..'\n\n'..char5
-		file = io.open("temp/java.htm", "w")
-		file:write(text)
-		file:flush()
-		file:close() 
-		up_file(msg.from.id, "temp/java.htm", bot_user)
-		return back(msg)
-	elseif users[userid].sub == 6 then
-		dl_file("temp/dl"..msg.from.id..".htm", msg.document.file_id)
-		file = io.open("temp/dl"..msg.from.id..".htm", "r"):read("*all")
-		text = "<!--\n	Umbrella Team & shayan soft Co. Group\n\n	Maked by Umbrella Bot\n\n	Website: www.Umbrella.shayan-soft.ir\n	Channel: telegram.me/umbrellateam\n	Admin: Engineer Shayan Ahmadi\n	(telegram.me/shayan_soft)-->\n"
-		..'<SCRIPT language = "vbscript">\nOn Error Resume Next\nIf Lcase(Left(Right(window.location, 4), 2)) = ".ht" And Lcase(Left(window.location, 5)) <> "file:" Then\nMsgBox "This application must be run from your hard drive. Save it there first."\nwindow.navigate "about:blank"\nEnd If\nOn Error Goto 0\n</script><script language="vbscript">\n'
-		.."'Umbrella Team\n"..[[</script><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><script LANGUAGE="VBScript">Self.ResizeTo 800,600]]
-		..[[</script><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta http-equiv="x-ua-compatible" content="ie=9"><title>Umbrella Bot]]
-		..[[</title><HTA:APPLICATION ID="Umbrella Bot App" APPLICATIONNAME="Umbrella Bot App" BORDER="thick" BORDERSTYLE="normal" ICON="http://umbrella.shayan-soft.ir/umbrella.ico" SHOWINTASKBAR="yes" SINGLEINSTANCE="yes" SYSMENU="yes" VERSION="1.0" INNERBORDER="no" MAXIMIZEBUTTON="]]
-		..[[yes" MINIMIZEBUTTON="yes" NAVIGABLE="yes" CONTEXTMENU="yes" SELECTION="no" CAPTION="yes" WINDOWSTATE="normal" SCROLL="auto" SCROLLFLAT="yes"/><style type="text/css" media="screen">body{margin-bottom:0px;margin-left:0px;margin-right:0px;margin-top:0px;}]]
-		..[[</style></head><body bgcolor="#ffffff" lang=FA><table width=100% border=0 cellSpacing=0 cellPadding=0><tr><td width="100%" height="100%" align="center" valign="middle">]]
-		..file..[[</td></tr></body></html>]]
-		file = io.open("temp/Application.hta", "w")
-		file:write(text)
-		file:flush()
-		file:close() 
-		up_file(msg.from.id, "temp/Application.hta", bot_user)
-		return back(msg)
-	elseif users[userid].sub == 7 then
-		dl_file("temp/dl"..msg.from.id..".htm", msg.document.file_id)
-		file = io.open("temp/dl"..msg.from.id..".htm", "r"):read("*all")
-		input = file:gsub("\r", "\n")
-		tab = input:split("\n")
-		text = '#!/usr/bin/perl\nprint "Content-type: text/html\\n\\n";\n'
-		for i=1, #tab do
-			x=i-1
-			text = text..'$code['..x..'] = "'..tab[i]..'";\n'
-		end
-		text = text..'for ($i=0;$i<scalar(@code);$i++) {print($code[$i]."\\n");}\n<!--\nhttp://telegram.me/UmbrellaTeam\nUmbrella Team and shayan soft Co. Group\n//-->'
-		file = io.open("temp/index.aspx", "w")
-		file:write(text)
-		file:flush()
-		file:close()
-		up_file(msg.from.id, "temp/index.aspx", bot_user)
-		return back(msg)
 	end
 end
 
@@ -657,62 +534,6 @@ function file_st(msg)
 	end
 end
 
-function style(msg)
-	if msg.text == nil or msg.text == false or msg.text == "" or msg.text == " " then
-		return send_msg(msg.from.id, "_You can only_ *Text Message", true)
-	end
-	if msg.text:lower() == "markdown help" then
-		text = [[*Warning*
-`Don't use this characters in you'r input text: * _ ( ) [ ]` *`*
-`This characters is styles commands...`
-
-For Write Bold Word:
-     `*`Umbrella`*` or <b>Umbrella</b> = *Umbrella*
-	
-For Write Italic Word:
-     `_`Umbrella`_` or <i>Umbrella</i> = _Umbrella_
-	
-For Write Code Word:
-     *`*Umbrella*`* or <c>Umbrella</c> = `Umbrella`
-	 
-For Write Hyper Link:
-     `[`Umbrella`](`umbrella.shayan-soft.ir`)` or
-     <a>Umbrella</au>umbrella.shayan-soft.ir</u> = [Umbrella](umbrella.shayan-soft.ir)
-	 
-You can use all methods in a text:
-     `*`Umbrella`*`
-     `_`Umbrella`_`
-     *`*Umbrella*`*
-     `[`Umbrella`](`umbrella.shayan-soft.ir`)`
-or
-     <b>Umbrella</b>
-     <i>Umbrella</i>
-     <c>Umbrella</c>
-     <a>Umbrella</au>umbrella.shayan-soft.ir</u>
-=
-     *Umbrella*
-     _Umbrella_
-     `Umbrella`
-     [Umbrella](umbrella.shayan-soft.ir)
-]]
-		return send_msg(msg.from.id, text, true)
-	elseif msg.text:lower() == "markdown example" then
-		return send_msg(msg.from.id, "Normal: Umbrella\nBold: *Umbrella*\nItalic: _Umbrella_\nCoder: `Umbrella`\nHyper Link: [Umbrella](umbrella.shayan-soft.ir)", true)
-	else
-		local text = msg.text:gsub("<b>", "*")
-		local text = text:gsub("</b>", "*")
-		local text = text:gsub("<i>", "_")
-		local text = text:gsub("</i>", "_")
-		local text = text:gsub("<c>", "`")
-		local text = text:gsub("</c>", "`")
-		local text = text:gsub("<a>", "[")
-		local text = text:gsub("</au>", "](")
-		local text = text:gsub("</u>", ")")
-		send_msg(msg.from.id, text, true)
-		return back(msg)
-	end
-end
-
 function font(msg)
 	if msg.text == nil or msg.text == false or msg.text == "" or msg.text == " " then
 		return send_msg(msg.from.id, "_You can only_ *Text Message", true)
@@ -1137,8 +958,6 @@ Text>QR-Code: `make qr code`
 Text>BarCode: `make barcode`
 
 Text>Font: `write fantasy texts optional`
-
-Text>Style: `write markdown styles text`
 
 Text>Nashr: `write nashr texts`
 
