@@ -1,36 +1,3 @@
-function pdf_conv(msg)
-	if users[userid].sub == 1 then
-		if check_match(msg.text, {"PDF>TIFF","TIFF>PDF","PDF>JPG","JPG>PDF","PDF>PNG","PNG>PDF"}) then
-			formats = msg.text:split(">")
-			users[userid].input = formats[1]
-			users[userid].output = formats[2]
-			users[userid].sub = 2
-			save_data("users.json", users)
-			return send_key(msg.from.id, "_Send a_ *"..formats[1].."* _file_\n`Maximum 2MB - 2000KB`", {{"Home"}}, true)
-		else
-			return send_msg(msg.from.id, "_You can only_ *choice a Key*", true)
-		end
-	elseif users[userid].sub == 2 then
-		if msg.document then
-			if not msg.document.file_name then return send_msg(msg.from.id, "_This file is_ *Unknown!*", true) end
-			file_size = msg.document.file_size/1000
-			if file_size > 2000 then return send_msg(msg.from.id, "*Maximum* _file size:_ `2MB or 2000KB`", true) end
-			if string.sub(msg.document.file_name:lower(), -3) == users[userid].input:lower() then
-				saved_file = "temp/dl"..msg.from.id.."."..users[userid].input:lower()
-				dl_file(saved_file, msg.document.file_id)
-				converted = "temp/conv"..msg.from.id.."."..users[userid].output:lower()
-				io.popen("convert "..saved_file.." "..converted)
-				up_file(msg.from.id, converted, bot_user)
-				return back(msg)
-			else
-				return send_msg(msg.from.id, "_You can send only_ *"..users[userid].input.."* _files_", true)
-			end
-		else
-			return send_msg(msg.from.id, "_You can send only_ *"..users[userid].input.."* _files_", true)
-		end
-	end
-end
-
 function photo_lower(msg)
 	if msg.photo then
 		i=#msg.photo
